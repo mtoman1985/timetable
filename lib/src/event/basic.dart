@@ -15,6 +15,8 @@ class BasicEvent extends Event {
     required this.id,
     required this.title,
     required this.backgroundColor,
+    required  this.scale,
+    required  this.direction,
     required super.start,
     required super.end,
   });
@@ -35,11 +37,15 @@ class BasicEvent extends Event {
   ///
   /// This is currently used by [BasicEventWidget] and [BasicAllDayEventWidget].
   final Color backgroundColor;
+  final double scale;
+  final String direction;
 
   BasicEvent copyWith({
     Object? id,
     String? title,
     Color? backgroundColor,
+    double? scale,
+    String? direction,
     DateTime? start,
     DateTime? end,
   }) {
@@ -47,6 +53,8 @@ class BasicEvent extends Event {
       id: id ?? this.id,
       title: title ?? this.title,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      scale: scale ?? this.scale,
+      direction: direction ?? this.direction,
       start: start ?? this.start,
       end: end ?? this.end,
     );
@@ -57,9 +65,9 @@ class BasicEvent extends Event {
   @override
   bool operator ==(dynamic other) =>
       other is BasicEvent &&
-      super == other &&
-      title == other.title &&
-      backgroundColor == other.backgroundColor;
+          super == other &&
+          title == other.title &&
+          backgroundColor == other.backgroundColor;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -73,11 +81,11 @@ class BasicEvent extends Event {
 /// A simple [Widget] for displaying a [BasicEvent].
 class BasicEventWidget extends StatelessWidget {
   const BasicEventWidget(
-    this.event, {
-    super.key,
-    this.onTap,
-    this.margin = const EdgeInsets.only(right: 1),
-  });
+      this.event, {
+        super.key,
+        this.onTap,
+        this.margin = const EdgeInsets.only(right: 1),
+      });
 
   /// The event to be displayed.
   final BasicEvent event;
@@ -107,7 +115,7 @@ class BasicEventWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 4, top: 2, right: 4),
             child: DefaultTextStyle(
               style: context.textTheme.bodyMedium!.copyWith(
-                fontSize: 12,
+                fontSize: 14,
                 color: event.backgroundColor.highEmphasisOnColor,
               ),
               child: Text(event.title),
@@ -122,12 +130,12 @@ class BasicEventWidget extends StatelessWidget {
 /// A simple [Widget] for displaying a [BasicEvent] as an all-day event.
 class BasicAllDayEventWidget extends StatelessWidget {
   const BasicAllDayEventWidget(
-    this.event, {
-    super.key,
-    required this.info,
-    this.onTap,
-    this.style,
-  });
+      this.event, {
+        super.key,
+        required this.info,
+        this.onTap,
+        this.style,
+      });
 
   /// The event to be displayed.
   final BasicEvent event;
@@ -140,14 +148,16 @@ class BasicAllDayEventWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? BasicAllDayEventWidgetStyle(context, event);
-
+    // print('yyyyyyyyyyyyyyyyyyyyyyyyyyy=== ${event.scale}');
     return Padding(
       padding: style.margin,
       child: CustomPaint(
         painter: AllDayEventBackgroundPainter(
-          info: info,
-          color: event.backgroundColor,
-          radii: style.radii,
+            info: info,
+            color: event.backgroundColor,
+            radii: style.radii,
+            scale: event.scale,
+            direction: event.direction
         ),
         child: Material(
           shape: AllDayEventBorder(
@@ -159,15 +169,18 @@ class BasicAllDayEventWidget extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            child: Padding(
-              padding: style.padding,
-              child: Text(
-                event.title,
-                style: style.textStyle,
-                maxLines: 1,
-                overflow: TextOverflow.visible,
-                softWrap: false,
-              ),
+            child:  Padding(
+                padding: style.padding,
+                child: Center(
+                  child:Text(
+                    event.title,
+                    style: style.textStyle,
+                    maxLines: 2,
+                    overflow: TextOverflow.visible,
+                    softWrap: true,
+                  ),
+                )
+
             ),
           ),
         ),
@@ -180,26 +193,26 @@ class BasicAllDayEventWidget extends StatelessWidget {
 @immutable
 class BasicAllDayEventWidgetStyle {
   factory BasicAllDayEventWidgetStyle(
-    BuildContext context,
-    BasicEvent event, {
-    EdgeInsetsGeometry? margin,
-    AllDayEventBorderRadii? radii,
-    EdgeInsetsGeometry? padding,
-    TextStyle? textStyle,
-  }) {
+      BuildContext context,
+      BasicEvent event, {
+        EdgeInsetsGeometry? margin,
+        AllDayEventBorderRadii? radii,
+        EdgeInsetsGeometry? padding,
+        TextStyle? textStyle,
+      }) {
     return BasicAllDayEventWidgetStyle.raw(
       margin: margin ?? const EdgeInsets.all(2),
       radii: radii ??
           const AllDayEventBorderRadii(
             cornerRadius: BorderRadius.all(Radius.circular(4)),
-            leftTipRadius: 4,
+            leftTipRadius: 6,
             rightTipRadius: 4,
           ),
-      padding: padding ?? const EdgeInsets.only(left: 4, top: 2, bottom: 2),
+      padding: padding ?? const EdgeInsets.only(left: 2, top: 2, bottom: 2),
       textStyle: textStyle ??
           context.theme.textTheme.bodyMedium!.copyWith(
-            fontSize: 14,
-            color: event.backgroundColor.highEmphasisOnColor,
+            fontSize: 12,
+            color:Colors.black54,// event.backgroundColor.highEmphasisOnColor,
           ),
     );
   }

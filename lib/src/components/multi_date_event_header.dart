@@ -123,14 +123,14 @@ class MultiDateEventHeaderStyle {
   }) {
     return MultiDateEventHeaderStyle.raw(
       eventHeight: eventHeight ?? 24,
-      maxEventRows: maxEventRows ?? 3,
+      maxEventRows: maxEventRows ?? 5,
       padding: padding ?? EdgeInsets.zero,
     );
   }
 
   const MultiDateEventHeaderStyle.raw({
     this.eventHeight = 24,
-    this.maxEventRows = 3,
+    this.maxEventRows = 5,
     this.padding = EdgeInsets.zero,
   });
 

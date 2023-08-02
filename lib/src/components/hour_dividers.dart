@@ -92,6 +92,19 @@ class _HourDividersPainter extends CustomPainter {
     for (final h in InternalDateTimeTimetable.innerDateHours) {
       final y = h * heightPerHour;
       canvas.drawLine(Offset(-8, y), Offset(size.width, y), _paint);
+      var  PaintHave= _paint ;
+      PaintHave = Paint()
+        ..color = Colors.black38
+        ..strokeWidth = style.width;
+      canvas.drawLine(Offset(-8,y+ (heightPerHour/2)), Offset(size.width, y+ (heightPerHour/2)), PaintHave);
+      PaintHave = Paint()
+        ..color = Colors.black12
+        ..strokeWidth = style.width;
+      canvas.drawLine(Offset(-8,y+ (heightPerHour/4)), Offset(size.width, y+ (heightPerHour/4)), PaintHave);
+      PaintHave = Paint()
+        ..color = Colors.black12
+        ..strokeWidth = style.width;
+      canvas.drawLine(Offset(-8,y+ (heightPerHour * 3/4)), Offset(size.width, y+ (heightPerHour * 3/4)), PaintHave);
     }
   }
 

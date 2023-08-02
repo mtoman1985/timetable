@@ -45,6 +45,8 @@ class MultiDateEventHeaderOverflow extends StatelessWidget {
         id: date,
         title: TimetableLocalizations.of(context).allDayOverflow(overflowCount),
         backgroundColor: context.theme.colorScheme.background.withOpacity(0),
+        scale:0.5,
+        direction: 'l',
         start: date,
         end: date.atEndOfDay,
       ),
