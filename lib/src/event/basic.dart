@@ -84,7 +84,7 @@ class BasicEventWidget extends StatelessWidget {
       this.event, {
         super.key,
         this.onTap,
-        this.onLongPress,
+        this.onDoubleTap,
         this.margin = const EdgeInsets.only(right: 1),
       });
 
@@ -94,7 +94,7 @@ class BasicEventWidget extends StatelessWidget {
   /// An optional callback that will be invoked when the user taps this widget.
   final VoidCallback? onTap;
   /// An optional callback that will be invoked when the user taps this widget.
-  final VoidCallback? onLongPress;
+  final VoidCallback? onDoubleTap;
 
   final EdgeInsetsGeometry margin;
 
@@ -114,7 +114,7 @@ class BasicEventWidget extends StatelessWidget {
         color: event.backgroundColor,
         child: InkWell(
           onTap: onTap,
-          onLongPress:onLongPress,
+            onDoubleTap:onDoubleTap,
           child: Padding(
             padding: const EdgeInsets.only(left: 4, top: 2, right: 4),
             child: DefaultTextStyle(
@@ -138,7 +138,7 @@ class BasicAllDayEventWidget extends StatelessWidget {
         super.key,
         required this.info,
         this.onTap,
-        this.onLongPress,
+        this.onDoubleTap,
         this.style,
       });
 
@@ -149,7 +149,7 @@ class BasicAllDayEventWidget extends StatelessWidget {
   /// An optional callback that will be invoked when the user taps this widget.
   final VoidCallback? onTap;
 
-  final VoidCallback? onLongPress;
+  final VoidCallback? onDoubleTap;
 
   final BasicAllDayEventWidgetStyle? style;
 
@@ -177,7 +177,7 @@ class BasicAllDayEventWidget extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            onLongPress: onLongPress,
+            onDoubleTap:onDoubleTap ,
             child:  Padding(
                 padding: style.padding,
                 child: Center(
