@@ -95,7 +95,7 @@ class _HourDividersPainter extends CustomPainter {
       var  PaintHave= _paint ;
       PaintHave = Paint()
         ..color = Colors.black38
-        ..strokeWidth = style.width;
+        ..strokeWidth = 5;
       canvas.drawLine(Offset(-8,y+ (heightPerHour/2)), Offset(size.width, y+ (heightPerHour/2)), PaintHave);
       PaintHave = Paint()
         ..color = Colors.black12
