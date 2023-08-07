@@ -60,9 +60,9 @@ class NowIndicatorStyle {
   }) {
     final defaultColor = context.theme.colorScheme.onBackground;
     return NowIndicatorStyle.raw(
-      shape: shape ?? CircleNowIndicatorShape(color: defaultColor),
+      shape: shape ?? CircleNowIndicatorShape(color:Colors.redAccent),
       lineColor: lineColor ?? defaultColor,
-      lineWidth: lineWidth ?? 1,
+      lineWidth: lineWidth ?? 2,
     );
   }
 
@@ -181,7 +181,7 @@ class EmptyNowIndicatorShape extends NowIndicatorShape {
 /// * [TriangleNowIndicatorShape], which draws a small triangle.
 /// * [EmptyNowIndicatorShape], which draws nothing.
 class CircleNowIndicatorShape extends NowIndicatorShape {
-  CircleNowIndicatorShape({required this.color, this.radius = 4})
+  CircleNowIndicatorShape({required this.color, this.radius = 5})
       : _paint = Paint()..color = color;
 
   final Color color;
