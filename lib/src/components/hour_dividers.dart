@@ -40,10 +40,10 @@ class HourDividers extends StatelessWidget {
 @immutable
 class HourDividersStyle {
   factory HourDividersStyle(
-    BuildContext context, {
-    Color? color,
-    double? width,
-  }) {
+      BuildContext context, {
+        Color? color,
+        double? width,
+      }) {
     final dividerBorderSide = Divider.createBorderSide(context);
     return HourDividersStyle.raw(
       color: color ?? dividerBorderSide.color,
@@ -80,8 +80,8 @@ class _HourDividersPainter extends CustomPainter {
   _HourDividersPainter({
     required this.style,
   }) : _paint = Paint()
-          ..color = style.color
-          ..strokeWidth = style.width;
+    ..color = style.color
+    ..strokeWidth = style.width;
 
   final HourDividersStyle style;
   final Paint _paint;
@@ -91,11 +91,15 @@ class _HourDividersPainter extends CustomPainter {
     final heightPerHour = size.height / Duration.hoursPerDay;
     for (final h in InternalDateTimeTimetable.innerDateHours) {
       final y = h * heightPerHour;
-      canvas.drawLine(Offset(-8, y), Offset(size.width, y), _paint);
       var  PaintHave= _paint ;
       PaintHave = Paint()
+        ..color = Colors.black87
+        ..strokeWidth = 3;
+      canvas.drawLine(Offset(-8, y), Offset(size.width, y), _paint);
+      PaintHave= _paint ;
+      PaintHave = Paint()
         ..color = Colors.black38
-        ..strokeWidth = 5;
+        ..strokeWidth = style.width;
       canvas.drawLine(Offset(-8,y+ (heightPerHour/2)), Offset(size.width, y+ (heightPerHour/2)), PaintHave);
       PaintHave = Paint()
         ..color = Colors.black12
